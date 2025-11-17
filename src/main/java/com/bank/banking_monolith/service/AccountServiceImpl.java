@@ -19,7 +19,6 @@ public class AccountServiceImpl implements AccountService {
     @Autowired
     public AccountRepository accountRepository;
 
-    // Generate account number
     private String generateAccountNumber(String holderName) {
         String initials = holderName.replaceAll("[^A-Za-z]", "");
         initials = initials.length() >= 3 ? initials.substring(0,3).toUpperCase() : initials.toUpperCase();

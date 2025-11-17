@@ -27,10 +27,9 @@ public class AccountControllerTest {
 
     @Test
     void testCreateAccount() throws Exception {
-        // Create a proper account with all fields that your service would generate
         Account a = new Account();
         a.setHolderName("Manoj");
-        a.setAccountNumber("MAN5678"); // Matches your new logic
+        a.setAccountNumber("MAN5678");
         a.setBalance(0.0);
         a.setStatus("ACTIVE");
         a.setCreatedAt(new Date());
@@ -48,7 +47,7 @@ public class AccountControllerTest {
     @Test
     void testGetAccount() throws Exception {
         Account a = new Account();
-        a.setAccountNumber("MAN5678"); // Use realistic account number
+        a.setAccountNumber("MAN5678");
         a.setHolderName("Manoj");
         a.setBalance(100.0);
 
