@@ -21,14 +21,10 @@ public class AccountServiceImpl implements AccountService {
 
     // Generate account number
     private String generateAccountNumber(String holderName) {
-        String initial;
-        if (holderName == null || holderName.isBlank()) {
-            initial = "A";
-        } else {
-            initial = holderName.substring(0, 1).toUpperCase();
-        }
-        int num = new Random().nextInt(9000) + 1000;
-        return initial + num;
+        String initials = holderName.replaceAll("[^A-Za-z]", "");
+        initials = initials.length() >= 3 ? initials.substring(0,3).toUpperCase() : initials.toUpperCase();
+        int rand = (int)(Math.random() * 9000) + 1000;
+        return initials + rand;
     }
 
     @Override

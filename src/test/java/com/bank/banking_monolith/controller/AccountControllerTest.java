@@ -10,6 +10,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.util.Date;
 import java.util.List;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -26,24 +27,37 @@ public class AccountControllerTest {
 
     @Test
     void testCreateAccount() throws Exception {
+        // Create a proper account with all fields that your service would generate
         Account a = new Account();
         a.setHolderName("Manoj");
+        a.setAccountNumber("MAN5678"); // Matches your new logic
+        a.setBalance(0.0);
+        a.setStatus("ACTIVE");
+        a.setCreatedAt(new Date());
+
         Mockito.when(service.createAccount(Mockito.any())).thenReturn(a);
 
         mvc.perform(post("/api/accounts")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{\"holderName\":\"Manoj\"}"))
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.accountNumber").value("MAN5678")) // Verify account number
+                .andExpect(jsonPath("$.holderName").value("Manoj"));
     }
 
     @Test
     void testGetAccount() throws Exception {
         Account a = new Account();
-        a.setAccountNumber("A1");
-        Mockito.when(service.getAccountByNumber("A1")).thenReturn(a);
+        a.setAccountNumber("MAN5678"); // Use realistic account number
+        a.setHolderName("Manoj");
+        a.setBalance(100.0);
 
-        mvc.perform(get("/api/accounts/A1"))
-                .andExpect(status().isOk());
+        Mockito.when(service.getAccountByNumber("MAN5678")).thenReturn(a);
+
+        mvc.perform(get("/api/accounts/MAN5678"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.accountNumber").value("MAN5678"))
+                .andExpect(jsonPath("$.holderName").value("Manoj"));
     }
 
     @Test
