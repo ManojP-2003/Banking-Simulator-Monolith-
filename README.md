@@ -2,8 +2,6 @@
 
 A complete Spring Boot–based **Banking Backend Application** that manages accounts and financial transactions using **REST APIs**, **MongoDB**, **Layered Architecture**, **Logging**, and **Unit Tests with Coverage**.
 
-This project is developed as part of the **Java FSD Program – Virtusa (Mini Project Phase-1)**.
-
 ---
 
 
