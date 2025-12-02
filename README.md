@@ -106,8 +106,8 @@ src/
 │
 └── test/java/com/bank/banking_monolith
     ├── controller
-    ├── service
-    └── exception
+    └── service
+    
 ```
 
 ---
